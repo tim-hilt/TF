@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Super-right
+
+WID=$(pfw)
+WW=$(wattr w $WID)
+WH=$(wattr h $WID)
+WX=$(wattr x $WID)
+WY=$(wattr y $WID)
+
+ROOT=$(lsw -r)
+SW=$(wattr w $ROOT)
+SH=$(wattr h $ROOT)
+
+if [ $WH -eq $((SH/2)) -a $WW -eq $((SW/2)) -a $WX -eq 0 ]; then  # quarter left
+    wtp $((SW/2)) $WY $WW $WH $WID                                # move quarter left
+else
+    wtp $((SW/2)) 0 $((SW/2)) $SH $WID                            # move half right
+fi

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Super-down
+
+WID=$(pfw)
+WW=$(wattr w $WID)
+WH=$(wattr h $WID)
+WX=$(wattr x $WID)
+WY=$(wattr y $WID)
+
+ROOT=$(lsw -r)
+SW=$(wattr w $ROOT)
+SH=$(wattr h $ROOT)
+
+if [ $WH -eq $((SH/2)) -a $WW -eq $((SW/2)) -a $WY -eq 0 ]; then  # quarter up
+    wtp $WX $((SH/2)) $WW $WH $WID                                # move down
+elif [ $WH -eq $SH -a $WW -eq $((SW/2)) ]; then                   # half
+    wtp $WX $((SH/2)) $WW $((SH/2)) $WID                          # move quarter down
+else
+    wtp $(((SW-WW)/2)) $(((SH-WH)/2)) 1024 768 $WID                         # center and resize
+fi

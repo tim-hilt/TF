@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Super-up
+
+WID=$(pfw)
+WW=$(wattr w $WID)
+WH=$(wattr h $WID)
+WX=$(wattr x $WID)
+WY=$(wattr y $WID)
+
+ROOT=$(lsw -r)
+SW=$(wattr w $ROOT)
+SH=$(wattr h $ROOT)
+
+if [ $WW -eq $((SW/2)) -a $WH -eq $((SH/2)) ]; then  # quarter
+    if [ $WY -eq $((SH/2)) ]; then
+        wtp $WX 0 $WW $WH $WID
+    else
+        wtp 0 0 $SW $SH $WID                         # make fullscreen
+    fi
+elif [ $WW -eq $((SW/2)) -a $WH -eq $SH ]; then      # half
+    wtp $WX 0 $WW $((SH/2)) $WID
+else                                                 # floating
+    wtp 0 0 $SW $SH $WID                             # make fullscreen
+fi
