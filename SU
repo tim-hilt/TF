@@ -2,6 +2,12 @@
 
 # Super-up
 
+OFFSET_BAR=19
+OFFSET_HALF_BAR=10
+OFFSET_BORDER=6
+OFFSET_BAR_BORDER=25
+OFFSET_HALF_BAR_BORDER=16
+
 WID=$(pfw)
 WW=$(wattr w $WID)
 WH=$(wattr h $WID)
@@ -12,14 +18,16 @@ ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
 SH=$(wattr h $ROOT)
 
-if [ $WW -eq $((SW/2)) -a $WH -eq $((SH/2)) ]; then  # quarter
-    if [ $WY -eq $((SH/2)) ]; then
-        wtp $WX 0 $WW $WH $WID
+if [ $WX -eq 0 -a $WY -eq $OFFSET_BAR -a $WW -eq $((SW-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER))]; then
+    exit  # Do nothing if already in end state
+elif [ $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $(((SH/2)-OFFSET_HALF_BAR_BORDER)) ]; then # If quarter
+    if [ $WY -eq $(((SH/2)+OFFSET_HALF_BAR)) ]; then                                           # If quarter down
+        wtp $WX $OFFSET_BAR $WW $WH $WID                                                       # Make quarter up
     else
-        wtp 0 0 $SW $SH $WID                         # make fullscreen
+        wtp 0 $OFFSET_BAR $((SW-OFFSET_BORDER)) $((SH-OFFSET_BAR_BORDER)) $WID                 # Make fullscreen
     fi
-elif [ $WW -eq $((SW/2)) -a $WH -eq $SH ]; then      # half
-    wtp $WX 0 $WW $((SH/2)) $WID
-else                                                 # floating
-    wtp 0 0 $SW $SH $WID                             # make fullscreen
+elif [ $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER)) ]; then          # If half
+    wtp $WX $OFFSET_BAR $WW $(((SH/2)-OFFSET_HALF_BAR_BORDER)) $WID                             # Make quarter up
+else                                                                                           # If floating
+    wtp 0 $OFFSET_BAR $((SW-OFFSET_BORDER)) $((SH-OFFSET_BAR_BORDER)) $WID                     # Make fullscreen
 fi

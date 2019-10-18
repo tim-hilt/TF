@@ -4,7 +4,8 @@ These scripts are bindable to shortcut-keys and will arange your windows in a be
 
 ** TODO
 
-- [ ] Get rid of doubly running code
-- [ ] Calculate values for bar in personal setup
-- [ ] Calculate values for window-borders
-- [ ] S-Down won't center window on first trigger
+- [X] Get rid of doubly running code
+- [X] Introduce variables for repeated values
+- [X] Calculate values for bar in personal setup
+- [X] Calculate values for window-borders
+- +S-Down won't center window on first trigger+

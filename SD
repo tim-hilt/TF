@@ -2,6 +2,12 @@
 
 # Super-down
 
+OFFSET_BAR=19
+OFFSET_HALF_BAR=10
+OFFSET_BORDER=6
+OFFSET_BAR_BORDER=25
+OFFSET_HALF_BAR_BORDER=16
+
 WID=$(pfw)
 WW=$(wattr w $WID)
 WH=$(wattr h $WID)
@@ -12,10 +18,12 @@ ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
 SH=$(wattr h $ROOT)
 
-if [ $WH -eq $((SH/2)) -a $WW -eq $((SW/2)) -a $WY -eq 0 ]; then  # quarter up
-    wtp $WX $((SH/2)) $WW $WH $WID                                # move down
-elif [ $WH -eq $SH -a $WW -eq $((SW/2)) ]; then                   # half
-    wtp $WX $((SH/2)) $WW $((SH/2)) $WID                          # move quarter down
+if [ $WX -eq $(((SW-WW)/2)) -a $WY -eq $(((SH-WH)/2)) -a $WW -eq 1024 -a $WH -eq 768 ]; then
+    exit  # Do nothing if already in desired state
+elif [  $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $(((SH/2)-OFFSET_HALF_BAR_BORDER)) -a $WY -eq $OFFSET_BAR ]; then # If quarter up
+    wtp $WX $(((SH/2)+OFFSET_HALF_BAR)) $WW $WH $WID                                                                   # Make quarter down
+elif [ $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER)) ]; then                                  # If half
+    wtp $WX $(((SH/2)+OFFSET_HALF_BAR)) $WW $(((SH/2)-OFFSET_HALF_BAR_BORDER)) $WID                                    # Make quarter down
 else
-    wtp $(((SW-WW)/2)) $(((SH-WH)/2)) 1024 768 $WID                         # center and resize
+    wtp $(((SW-WW)/2)) $(((SH-WH)/2)) 1024 768 $WID                                                                    # Center and resize
 fi

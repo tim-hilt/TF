@@ -2,6 +2,12 @@
 
 # Super-Left
 
+OFFSET_BAR=19
+OFFSET_HALF_BAR=10
+OFFSET_BORDER=6
+OFFSET_BAR_BORDER=25
+OFFSET_HALF_BAR_BORDER=16
+
 WID=$(pfw)
 WW=$(wattr w $WID)
 WH=$(wattr h $WID)
@@ -12,8 +18,10 @@ ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
 SH=$(wattr h $ROOT)
 
-if [ $WH -eq $((SH/2)) -a $WW -eq $((SW/2)) -a $WX -eq $((SW/2)) ]; then  # quarter right
-    wtp 0 $WY $WW $WH $WID                                                # move quarter left
+if [ $WX -eq 0 -a $WY -eq $OFFSET_BAR -a $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER)) ]; then
+    exit  # Do nothing if desired state already reached
+elif [ $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $(((SH/2)-OFFSET_HALF_BAR_BORDER)) -a $WX -eq $((SW/2)) ]; then # If quarter right
+    wtp 0 $WY $WW $WH $WID                                                                                          # Make quarter left
 else
-    wtp 0 0 $((SW/2)) $SH $WID                                            # move half left
+    wtp 0 $OFFSET_BAR $(((SW/2)-OFFSET_BORDER)) $((SH-OFFSET_BAR_BORDER)) $WID                                      # move half left
 fi
