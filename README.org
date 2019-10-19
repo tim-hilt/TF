@@ -8,4 +8,5 @@ These scripts are bindable to shortcut-keys and will arange your windows in a be
 - [X] Introduce variables for repeated values
 - [X] Calculate values for bar in personal setup
 - [X] Calculate values for window-borders
+- [X] Integrate mmutils for multi-monitor-support
 - +S-Down won't center window on first trigger+

@@ -14,11 +14,12 @@ WH=$(wattr h $WID)
 WX=$(wattr x $WID)
 WY=$(wattr y $WID)
 
-ROOT=$(lsw -r)
-SW=$(wattr w $ROOT)
-SH=$(wattr h $ROOT)
+AM=$(pfm)
+SW=$(mattr w $AM)
+SH=$(mattr h $AM)
 
-if [ $WX -eq 0 -a $WY -eq $OFFSET_BAR -a $WW -eq $((SW-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER))]; then
+if [ $WX -eq 0 -a $WY -eq $OFFSET_BAR -a $WW -eq $((SW-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER))
+   ]; then
     exit  # Do nothing if already in end state
 elif [ $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $(((SH/2)-OFFSET_HALF_BAR_BORDER)) ]; then # If quarter
     if [ $WY -eq $(((SH/2)+OFFSET_HALF_BAR)) ]; then                                           # If quarter down

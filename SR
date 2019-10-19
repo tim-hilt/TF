@@ -14,9 +14,9 @@ WH=$(wattr h $WID)
 WX=$(wattr x $WID)
 WY=$(wattr y $WID)
 
-ROOT=$(lsw -r)
-SW=$(wattr w $ROOT)
-SH=$(wattr h $ROOT)
+AM=$(pfm)
+SW=$(mattr w $AM)
+SH=$(mattr h $AM)
 
 if [ $WX -eq $((SW/2)) -a $WY -eq $OFFSET_BAR -a $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER)) ]; then
     exit  # Do nothing if desired state already reached

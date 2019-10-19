@@ -14,9 +14,9 @@ WH=$(wattr h $WID)
 WX=$(wattr x $WID)
 WY=$(wattr y $WID)
 
-ROOT=$(lsw -r)
-SW=$(wattr w $ROOT)
-SH=$(wattr h $ROOT)
+AM=$(pfm)
+SW=$(mattr w $AM)
+SH=$(mattr h $AM)
 
 if [ $WX -eq $(((SW-WW)/2)) -a $WY -eq $(((SH-WH)/2)) -a $WW -eq 1024 -a $WH -eq 768 ]; then
     exit  # Do nothing if already in desired state
