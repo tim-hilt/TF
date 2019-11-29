@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Init script
+
+OFFSET_BAR=19
+OFFSET_HALF_BAR=10
+BORDERPX=2  # Width of border
+
+OFFSET_BORDER=$((2*BORDERPX))
+OFFSET_BAR_BORDER=$((OFFSET_BAT+(2*BORDERPX)))
+OFFSET_HALF_BAR_BORDER=$((OFFSET_HALF_BAR+(2*BORDERPX)))
+
+WID=$(pfw)
+WW=$(wattr w $WID)
+WH=$(wattr h $WID)
+WX=$(wattr x $WID)
+WY=$(wattr y $WID)
+
+AM=$(pfm)
+SW=$(mattr w $AM)
+SH=$(mattr h $AM)

@@ -2,21 +2,7 @@
 
 # Super-right
 
-OFFSET_BAR=19
-OFFSET_HALF_BAR=10
-OFFSET_BORDER=6
-OFFSET_BAR_BORDER=25
-OFFSET_HALF_BAR_BORDER=16
-
-WID=$(pfw)
-WW=$(wattr w $WID)
-WH=$(wattr h $WID)
-WX=$(wattr x $WID)
-WY=$(wattr y $WID)
-
-AM=$(pfm)
-SW=$(mattr w $AM)
-SH=$(mattr h $AM)
+source /home/tim/scripts/TF/init
 
 if [ $WX -eq $((SW/2)) -a $WY -eq $OFFSET_BAR -a $WW -eq $(((SW/2)-OFFSET_BORDER)) -a $WH -eq $((SH-OFFSET_BAR_BORDER)) ]; then
     exit  # Do nothing if desired state already reached

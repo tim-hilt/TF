@@ -2,21 +2,7 @@
 
 # Super-down
 
-OFFSET_BAR=19
-OFFSET_HALF_BAR=10
-OFFSET_BORDER=6
-OFFSET_BAR_BORDER=25
-OFFSET_HALF_BAR_BORDER=16
-
-WID=$(pfw)
-WW=$(wattr w $WID)
-WH=$(wattr h $WID)
-WX=$(wattr x $WID)
-WY=$(wattr y $WID)
-
-AM=$(pfm)
-SW=$(mattr w $AM)
-SH=$(mattr h $AM)
+source /home/tim/scripts/TF/init
 
 if [ $WX -eq $(((SW-WW)/2)) -a $WY -eq $(((SH-WH)/2)) -a $WW -eq 1024 -a $WH -eq 768 ]; then
     exit  # Do nothing if already in desired state
